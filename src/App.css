@@ -36,3 +36,13 @@
   border: none;
   background: transparent;
 }
+
+.branding {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.branding-sub {
+  display: block;
+  font-size: 12px;
+}
