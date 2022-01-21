@@ -1,3 +1,19 @@
+button {
+  background: #70309e;
+  border-radius: 32px;
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button .fa{
+  font-size: 22px;
+  margin-right: 8px
+}
+
 .main-container {
   background-color: #110010;
   height: 100vh
@@ -13,13 +29,13 @@
   width: 100%;
 }
 
-.header > div {
-  border: solid;  
+.header > div {  
   display: flex;
   max-width: 1000px;
   margin: auto;
   padding: 8px 0;
   justify-content: space-between;
+  align-items: center;
 }
 
 .search {
