@@ -206,3 +206,29 @@ button .fa{
 .form-sumit button:last-of-type {
   margin-left: 8px
 }
+
+.filter {
+  position: relative;
+}
+
+.filter ul{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  background-color: white;
+  color: #000;
+  display: none;
+  border-radius: 8px
+}
+
+.filter ul li{
+  padding: 8px;
+  border-bottom: solid 1px #ccc;
+  cursor: pointer;
+}
+
+.filter:hover ul{
+  display: block;
+}
