@@ -1,7 +1,16 @@
 import React from 'react';
 
 const MidSection = (props) => {
-  return <div>
+  return <div className='list-container'>
+    <div>
+     <div></div>
+      <div><i class="fa fa-sort" onClick={() => props.sortEmployees('firstName')}></i> First name</div>
+      <div><i class="fa fa-sort" onClick={() => props.sortEmployees('lastName')}></i> Last name</div>
+      <div><i class="fa fa-sort" onClick={() => props.sortEmployees('contactNumber')}></i> Contact number</div>
+      <div className='list-action'> <i className='fa fa-eye'></i></div>
+      <div className='list-action'><i className='fa fa-pencil'></i></div>
+      <div className='list-action'><i className='fa fa-trash'></i></div>
+      </div>
       {props.children}
   </div>;
 }

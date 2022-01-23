@@ -20,7 +20,7 @@ button .fa{
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1000px;
   margin: auto
 }
 
@@ -61,4 +61,68 @@ button .fa{
 .branding-sub {
   display: block;
   font-size: 12px;
+}
+
+.list-container {
+  display: table;
+  width: 100%;
+  border-collapse: collapse
+}
+
+.list-container > div{
+  color: white;
+  display: table-row;
+  border-bottom: solid #110010 2px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+.list-container > div:first-of-type {
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.list-container > div > div{
+  display: table-cell;  
+  padding: 16px; 
+  background-color: #767070;
+}
+
+.list-container > div > div:nth-of-type(even){  
+  background-color: #837c7c;
+}
+
+.list-container > div:first-of-type > div{
+  padding: 4px 16px;
+}
+
+.list-action {
+  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  transition: .5s all;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.list-action:last-of-type {
+  color: orange
+}
+
+.list-action:hover {
+  color: #000
+}
+
+.list-bullets {
+  border: solid 1px;
+  color: rgba(255,255,255,.5);
+  background-color: #70309e;
+  width: 25px;
+  height: 25px;
+  display: inline-flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
