@@ -2,31 +2,47 @@ import React, { useState, useRef } from 'react';
 
 const EmployeeCaptureForm = (props) => {
   console.log(props)
-    const [formInfo, setFormInfo] = useState({ firstName: props?.employeesDetails.firstName,
-        lastName: props?.employeesDetails.lastName,
-        contactNumber: props?.employeesDetails.contactNumber,
-        id: props?.employeesDetails.id,
-        dob: props?.employeesDetails.dob,
-        streetAddress: props?.employeesDetails.streetAddress,
-        city: props?.employeesDetails.city,
-        postalCode: props?.employeesDetails.postalCode,
-        country: props?.employeesDetails.country,
+    const [formInfo, setFormInfo] = useState({ firstName: props?.employeesDetails?.firstName,
+        lastName: props?.employeesDetails?.lastName,
+        contactNumber: props?.employeesDetails?.contactNumber,
+        id: props?.employeesDetails?.id,
+        dob: props?.employeesDetails?.dob,
+        streetAddress: props?.employeesDetails?.streetAddress,
+        city: props?.employeesDetails?.city,
+        postalCode: props?.employeesDetails?.postalCode,
+        country: props?.employeesDetails?.country,
         //skills: [null]
       });
 
       const [skillsCounter, setSkillsCounter] = useState(1)
 
       const addSkill = () => {
-        setSkillsCounter(skillsCounter + 1)
+        setSkillsCounter(skillsCounter + 1);
       }
 
       const removeSkill = () => {
-        setSkillsCounter(skillsCounter - 1)
+        setSkillsCounter(skillsCounter - 1);
       }
       
         const handleSubmit = (event) => {
+          
           event.preventDefault();
-      
+          
+        if (!props.employeesDetails.id){
+          let alphabets = "abcdefghijklmnopqrstuvwxyz";
+          let letters = ''
+          let digits = Math.floor(1000 + Math.random() * 9000);
+
+          while (letters.length < 2) {
+            letters += alphabets[Math.floor(Math.random() * alphabets.length)].toUpperCase();
+          }    
+
+          formInfo['id'] = letters + digits
+          props.refreshEmployeeList(formInfo);
+        } else {
+          formInfo['id'] = props.employeesDetails.id
+          props.editEmployeeData(formInfo)
+        }
         };
 
       
@@ -35,10 +51,10 @@ const EmployeeCaptureForm = (props) => {
         const handleChange = (e, index = null) => {
           const name = e.target.name;
           const value = e.target.value;
-        //   setFormInfo({ ...formInfo, [name]: value });
+          setFormInfo({ ...formInfo, [name]: value });
 
-        let array = formInfo.skills.slice() 
-        array.splice(index, 0, {[name]: value })
+        // let array = formInfo.skills.slice() 
+        // array.splice(index, 0, {[name]: value })
         // console.log(array)
         
         // setFormInfo({...formInfo,  skills: array });
@@ -48,7 +64,7 @@ const EmployeeCaptureForm = (props) => {
         //   console.log(index)
         //   console.log(formInfo)
 
-        console.log(inputRefs)
+        // console.log(inputRefs)
         };
 
   return <div className='employeee-form-container'>
@@ -122,14 +138,14 @@ const EmployeeCaptureForm = (props) => {
 
 )}
     
-{props.action == ('Edit' || 'Add') ? <div className='add-more-skills'>
+{props.action != 'View' ? <div className='add-more-skills'>
 {skillsCounter > 1 ? <i className='fa fa-minus' onClick={() => removeSkill()}></i>: ''} &nbsp;
         <i className='fa fa-plus' onClick={() => addSkill()}></i>
     </div>: ''}
 
 
     <div className='form-sumit'><button onClick={() => {props.closeWindow()}}>Close</button> 
-    {props.action == ('Edit' || 'Add') ? <button>Submit</button>: ''}
+    {props.action != 'View' ? <button onClick={handleSubmit}>Submit</button>: ''}
     </div>
 </form>
   </div>;

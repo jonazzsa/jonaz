@@ -7,170 +7,10 @@ import EmptyState from './EmptyState';
 import Layout from './Layout';
 import MidSection from './MidSection';
 
-const Main = (props) => {
-  const [employeesDetails, setEmployees] = useState([{
-    firstName: 'Jonas1',
-    lastName: 'Moapolela',
-    contactNumber: '0843265349',
-    id: 687671,
-    dob: '1989-jan',
-    streetAddress: 'Jeff masemola',
-    city: 'Johanneburg',
-    postalCode: '0949',
-    country: 'South Africa',
-    skills: [
-      {
-        skill: 'Excel',
-        years: '20',
-        seniorityRating: '5'
-      },
-      {
-        skill: 'Word',
-        years: '30',
-        seniorityRating: '5'
-      }
-    ]
-  },
-  {
-    firstName: 'Mark',
-    lastName: 'Henry',
-    contactNumber: '0843265349',
-    id: 687671,
-    dob: '1989-jan',
-    streetAddress: 'Jeff masemola',
-    city: 'Johanneburg',
-    postalCode: '0949',
-    country: 'South Africa',
-    skills: [
-      {
-        skill: 'Excel',
-        years: '20',
-        seniorityRating: '5'
-      },
-      {
-        skill: 'Word',
-        years: '30',
-        seniorityRating: '5'
-      }
-    ]
-  },
-  {
-    firstName: 'Mark',
-    lastName: 'Henry',
-    contactNumber: '0843265349',
-    id: 687671,
-    dob: '1989-jan',
-    streetAddress: 'Jeff masemola',
-    city: 'Johanneburg',
-    postalCode: '0949',
-    country: 'South Africa',
-    skills: [
-      {
-        skill: 'Excel',
-        years: '20',
-        seniorityRating: '5'
-      },
-      {
-        skill: 'Word',
-        years: '30',
-        seniorityRating: '5'
-      }
-    ]
-  },
-  {
-    firstName: 'Mark',
-    lastName: 'Henry',
-    contactNumber: '0843265349',
-    id: 687671,
-    dob: '1989-jan',
-    streetAddress: 'Jeff masemola',
-    city: 'Johanneburg',
-    postalCode: '0949',
-    country: 'South Africa',
-    skills: [
-      {
-        skill: 'Excel',
-        years: '20',
-        seniorityRating: '5'
-      },
-      {
-        skill: 'Word',
-        years: '30',
-        seniorityRating: '5'
-      }
-    ]
-  },
-  {
-    firstName: 'Mark',
-    lastName: 'Henry',
-    contactNumber: '0843265349',
-    id: 687671,
-    dob: '1989-jan',
-    streetAddress: 'Jeff masemola',
-    city: 'Johanneburg',
-    postalCode: '0949',
-    country: 'South Africa',
-    skills: [
-      {
-        skill: 'Excel',
-        years: '20',
-        seniorityRating: '5'
-      },
-      {
-        skill: 'Word',
-        years: '30',
-        seniorityRating: '5'
-      }
-    ]
-  },
-  {
-    firstName: 'Mark',
-    lastName: 'Henry',
-    contactNumber: '0843265349',
-    id: 687671,
-    dob: '1989-jan',
-    streetAddress: 'Jeff masemola',
-    city: 'Johanneburg',
-    postalCode: '0949',
-    country: 'South Africa',
-    skills: [
-      {
-        skill: 'Excel',
-        years: '20',
-        seniorityRating: '5'
-      },
-      {
-        skill: 'Word',
-        years: '30',
-        seniorityRating: '5'
-      }
-    ]
-  },
-  {
-    firstName: 'King',
-    lastName: 'James',
-    contactNumber: '0843265349',
-    id: 687671,
-    dob: '1989-jan',
-    streetAddress: 'Jeff masemola',
-    city: 'Johanneburg',
-    postalCode: '0949',
-    country: 'South Africa',
-    skills: [
-      {
-        skill: 'Excel',
-        years: '20',
-        seniorityRating: '5'
-      },
-      {
-        skill: 'Word',
-        years: '30',
-        seniorityRating: '5'
-      }
-    ]
-  }]);
+const Main = () => {
+  const [employeesDetails, setEmployees] = useState([]);
 
-  const [employeesDetailsCopy] = useState(employeesDetails);
+  const [employeesDetailsCopy, setEmployeesDetailsCopy] = useState([...employeesDetails]);
 
   const [isVisibleCapture, setIsVisibleCapture] = useState(false);
 
@@ -189,6 +29,18 @@ const Main = (props) => {
     setSelectedUser([]);
   }
 
+  const editEmployeeData = (arr) => {
+    let newArr = employeesDetails.map((item, index) => { 
+    if (item['id'] === arr['id']){
+          item = arr
+    }
+      return item
+    }) 
+    setEmployees([...newArr]); 
+    setEmployeesDetailsCopy([...newArr]); 
+    setIsVisibleCapture(false);
+  }
+
   const closeWindow = () => {
     setIsVisibleCapture(false);
     setIsDeleteConfirm(false);
@@ -200,11 +52,18 @@ const Main = (props) => {
   }
 
   const deleteEmployee = () => {
-    const news = employeesDetails.filter((item, index) => {      
+    let newArr = employeesDetails.filter((item, index) => {      
          return index != deleteId;
     })  
-    setEmployees([...news]); 
+    setEmployees([...newArr]); 
+    setEmployeesDetailsCopy([...newArr]); 
     setIsDeleteConfirm(false);    
+  }
+
+  const refreshEmployeeList = (arr) => {
+    setEmployees([...employeesDetails, arr]); 
+    setEmployeesDetailsCopy([...employeesDetailsCopy, arr]); 
+    setIsVisibleCapture(false);
   }
 
   const editEmployee = (action, index) => {
@@ -214,22 +73,29 @@ const Main = (props) => {
   }
 
   
-  const sortEmployees = (field) => {      
-    employeesDetails.sort((a, b) => {     
-      if(a[field].localeCompare(b[field])) { 
-        return -1; } else {
-          return 1; 
-        }              
-    })
-    setEmployees([...employeesDetails]);        
+  const sortEmployees = (field) => { 
+    alert()     
+    // employeesDetails.sort((a, b) => {     
+    //   if(a[field].localeCompare(b[field])) { 
+    //     return -1; } else {
+    //       return 1; 
+    //     }              
+    // })
+    // setEmployees([...employeesDetails]);     
+    console.log(employeesDetails)   
   }
 
   const searchEmployees = (e) => {    
 
-    setEmployees([...employeesDetailsCopy]); 
+    let newArrCopy = employeesDetailsCopy;
 
-    const news = employeesDetails.filter(item => {
-      
+    console.log(newArrCopy)
+
+    setEmployees([...newArrCopy]); 
+
+    console.log(employeesDetails)
+
+    let newArr = employeesDetails.filter(item => {      
          return item.firstName.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1 
          || item.lastName.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1
          || item.contactNumber.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1
@@ -237,7 +103,8 @@ const Main = (props) => {
     })  
 
 
-    setEmployees([...news])   
+    setEmployees([...newArr])   
+    
 }
 
 
@@ -253,7 +120,7 @@ const Main = (props) => {
              employeeDetails={employee} />)}
           </MidSection>: ''}
           {employeesDetails.length == 0 ? <EmptyState />: ''}
-          {isVisibleCapture ? <EmployeeCaptureForm action={captureAction} employeesDetails={selectedUser} closeWindow={closeWindow}/>: ''}
+          {isVisibleCapture ? <EmployeeCaptureForm editEmployeeData={editEmployeeData} refreshEmployeeList={refreshEmployeeList} action={captureAction} employeesDetails={selectedUser} closeWindow={closeWindow}/>: ''}
           {isVisibleCapture || isDeleteConfirm ? <BackDrop />: ''}
           {isDeleteConfirm ? <DeleteConfirm employeeName={`${employeesDetails[deleteId]['firstName']} ${employeesDetails[deleteId]['lastName']}`} closeWindow={closeWindow} deleteEmployee={deleteEmployee} />: ''}
       </Layout>
