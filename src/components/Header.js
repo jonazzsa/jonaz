@@ -9,7 +9,7 @@ const Header = (props) => {
         <div><Branding /></div>
         <div><EmployeeSearch searchEmployees={props.searchEmployees}/></div>
         <div><EmployeeFilter /></div>
-        <div><button onClick={(e) => props.addEmployee()}>New Employee</button></div>
+        <div><button className='button-white' onClick={(e) => props.addEmployee()}><i className='fa fa-plus'></i> New Employee</button></div>
       </div>
   </div>;
 };

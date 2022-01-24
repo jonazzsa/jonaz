@@ -7,42 +7,88 @@ import MidSection from './MidSection';
 
 const Main = (props) => {
   const [employeesDetails, setEmployees] = useState([{
-    firstName: 'Jonas',
+    firstName: 'Jonas1',
     lastName: 'Moapolela',
     contactNumber: '0843265349',
     id: 687671,
-    index: 1
+    dob: '1989-jan',
+    streetAddress: 'Jeff masemola',
+    city: 'Johanneburg',
+    postalCode: '0949',
+    country: 'South Africa',
+    skills: [
+      {
+        skill: 'Excel',
+        years: '20',
+        seniorityRating: '5'
+      },
+      {
+        skill: 'Word',
+        years: '30',
+        seniorityRating: '5'
+      }
+    ]
   },
   {
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: 'Mark',
+    lastName: 'Henry',
     contactNumber: '0843265349',
     id: 687671,
-    index: 2
+    dob: '1989-jan',
+    streetAddress: 'Jeff masemola',
+    city: 'Johanneburg',
+    postalCode: '0949',
+    country: 'South Africa',
+    skills: [
+      {
+        skill: 'Excel',
+        years: '20',
+        seniorityRating: '5'
+      },
+      {
+        skill: 'Word',
+        years: '30',
+        seniorityRating: '5'
+      }
+    ]
   },
   {
-    firstName: 'Siya',
-    lastName: 'Kholisi',
+    firstName: 'King',
+    lastName: 'James',
     contactNumber: '0843265349',
     id: 687671,
-    index: 3
-  },
-  {
-    firstName: 'Jacob',
-    lastName: 'Miller',
-    contactNumber: '1843265349',
-    id: 687671,
-    index: 4
+    dob: '1989-jan',
+    streetAddress: 'Jeff masemola',
+    city: 'Johanneburg',
+    postalCode: '0949',
+    country: 'South Africa',
+    skills: [
+      {
+        skill: 'Excel',
+        years: '20',
+        seniorityRating: '5'
+      },
+      {
+        skill: 'Word',
+        years: '30',
+        seniorityRating: '5'
+      }
+    ]
   }]);
 
   const [employeesDetailsCopy] = useState(employeesDetails)
 
   const [isVisibleCapture, setIsVisibleCapture] = useState(false)
 
+  const [captureAction, setCaptureAction] = useState("")
 
+  const [selectedUser, setSelectedUser] = useState([])
+
+ 
 
   const addEmployee = () => {
     setIsVisibleCapture(true)
+    setSelectedUser([])
   }
 
   const closeWindow = () => {
@@ -53,14 +99,13 @@ const Main = (props) => {
    
   }
 
-  const editEmployee = (id) => {
+  const editEmployee = (id, action, index) => {
     setIsVisibleCapture(true)
+    setCaptureAction(action)
+    setSelectedUser(employeesDetails[index])
   }
 
-  const viewEmployee = (id) => {
-    
-  }
-
+  
   const sortEmployees = (field) => {      
     employeesDetails.sort((a, b) => {     
       if(a[field].localeCompare(b[field])) { 
@@ -74,8 +119,6 @@ const Main = (props) => {
   const searchEmployees = (e) => {    
 
     setEmployees([...employeesDetailsCopy]) 
-
-    console.log(employeesDetails)
 
     const news = employeesDetails.filter(item => {
       
@@ -92,16 +135,16 @@ const Main = (props) => {
 
 
   return <div>
-      <Layout addEmployee={addEmployee} searchEmployees={searchEmployees}>
+      <Layout addEmployee={addEmployee}
+        searchEmployees={searchEmployees}>
           <MidSection sortEmployees={sortEmployees}>
              {employeesDetails.map((employee, index) => <EmployeeListItem key={index} 
-             index={index + 1}
+             index={index}
              deleteEmployee={deleteEmployee} 
-             editEmployee={editEmployee} 
-             viewEmployee={viewEmployee} 
+             editEmployee={editEmployee}
              employeeDetails={employee} />)}
           </MidSection>
-          {isVisibleCapture ? <EmployeeCaptureForm closeWindow={closeWindow}/>: ''}
+          {isVisibleCapture ? <EmployeeCaptureForm action={captureAction} employeesDetails={selectedUser} closeWindow={closeWindow}/>: ''}
           {isVisibleCapture ? <BackDrop />: ''}
       </Layout>
   </div>;

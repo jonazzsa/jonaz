@@ -13,28 +13,50 @@ button {
   justify-content: space-between;
   text-transform: uppercase;
   font-size: 10px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-weight: 900;
+  transition: all .5s;
+  cursor: pointer;
 }
+
+button:hover {
+  background: rgba(255,255,255,0.7);
+  color: #70309e;
+  box-shadow: 0px 0px 1px #70309e;
+}
+
 
 button .fa{
   font-size: 22px;
   margin-right: 8px
 }
 
+.button-white {
+  background: rgba(255,255,255,0.7);
+  color: #70309e;
+  box-shadow: 1px 1px 5px #333;
+}
+
+.button-white:hover {
+  background: #70309e;
+  color: rgba(255,255,255,0.7);
+  box-shadow: 0px 0px 1px rgba(255,255,255,0.7);
+}
+
 .main-container {
   background-color: #110010;
-  height: 100vh
+  height: 100vh;
 }
 
 .container {
   max-width: 1000px;
-  margin: auto
+  margin: 16px auto
 }
 
 .header {
-  color: white;
+  color: rgba(255,255,255,.6);
   width: 100%;
+  background-color: #70309e;
 }
 
 .header > div {  
@@ -53,6 +75,7 @@ button .fa{
   border-radius: 4px;
   font-size: 16px;
   display: flex;
+  background-color: rgba(255, 255, 255, .4);
 }
 
 .search input {
@@ -63,14 +86,22 @@ button .fa{
   outline: none;
 }
 
+.search input::placeholder {
+  color: rgba(255, 255, 255, .6)
+}
+
 .branding {
-  font-size: 26px;
+  font-size: 15px;
   font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .branding-sub {
   display: block;
-  font-size: 12px;
+  font-size: 9px;
+  letter-spacing: initial;
+  font-weight: initial;
 }
 
 .list-container {
@@ -80,7 +111,7 @@ button .fa{
 }
 
 .list-container > div{
-  color: white;
+  color: rgba(255, 255, 255, .4);
   display: table-row;
   border-bottom: solid #110010 2px;
   margin-bottom: 8px;
@@ -95,12 +126,11 @@ button .fa{
 .list-container > div > div{
   display: table-cell;  
   padding: 16px; 
-  background-color: #767070;
+  background-color: #242335;
+
 }
 
-.list-container > div > div:nth-of-type(even){  
-  background-color: #837c7c;
-}
+
 
 .list-container > div:first-of-type > div{
   padding: 4px 16px;
@@ -185,18 +215,24 @@ button .fa{
   margin-bottom: 8px
 }
 
-.form-group input{
+.form-group label {
+  color: rgba(255,255,255,.3)
+}
+
+.form-group input {
   width: 100%;
   border-radius: 4px;
   border: none;
   padding: 8px;
   background-color: #786f70;
-  border: solid #242335 2px
+  border: solid #242335 2px;
+  color: rgba(255,255,255,.5);
 }
 
 .form-group-group {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .form-sumit {
@@ -209,6 +245,8 @@ button .fa{
 
 .filter {
   position: relative;
+  text-transform: uppercase;
+  font-size: 11px;
 }
 
 .filter ul{
@@ -227,6 +265,11 @@ button .fa{
   padding: 8px;
   border-bottom: solid 1px #ccc;
   cursor: pointer;
+}
+
+.add-more-skills {
+  margin-bottom: 16px;
+  text-align: right;
 }
 
 .filter:hover ul{

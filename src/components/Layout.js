@@ -3,7 +3,9 @@ import Header from './Header';
 
 const Layout = (props) => {
   return <div className='main-container'>
-      <Header addEmployee={props.addEmployee} searchEmployees={props.searchEmployees}/>
+      <Header addEmployee={props.addEmployee} 
+      searchEmployees={props.searchEmployees}
+      />
       <div className='container'>      
         {props.children}
       </div>
