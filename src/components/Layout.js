@@ -5,6 +5,7 @@ const Layout = (props) => {
   return <div className='main-container'>
       <Header addEmployee={props.addEmployee} 
       searchEmployees={props.searchEmployees}
+      employeeCounter={props.employeeCounter}
       />
       <div className='container'>      
         {props.children}

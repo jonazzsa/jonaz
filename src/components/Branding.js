@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Branding = () => {
+const Branding = (props) => {
   return <div className='branding'>Employees
-      <span className='branding-sub'>There are 4 employees</span>
+      <span className='branding-sub'>{props.employeeCounter > 1 ? `There are ${props.employeeCounter} employees`: `There is ${props.employeeCounter} employee`}</span>
   </div>;
 };
 

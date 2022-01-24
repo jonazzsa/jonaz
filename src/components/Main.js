@@ -9,22 +9,15 @@ import MidSection from './MidSection';
 
 const Main = () => {
   const [employeesDetails, setEmployees] = useState([]);
-
   const [employeesDetailsCopy, setEmployeesDetailsCopy] = useState([...employeesDetails]);
-
   const [isVisibleCapture, setIsVisibleCapture] = useState(false);
-
   const [captureAction, setCaptureAction] = useState("");
-
   const [selectedUser, setSelectedUser] = useState([]);
-
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
+  const [deleteId, setDeleteId] = useState(); 
+  const [employeeCounter, setEmployeeCounter] = useState(0); 
 
-  const [deleteId, setDeleteId] = useState();
-
- 
-
-  const addEmployee = () => {
+   const addEmployee = () => {
     setIsVisibleCapture(true);
     setSelectedUser([]);
   }
@@ -32,9 +25,9 @@ const Main = () => {
   const editEmployeeData = (arr) => {
     let newArr = employeesDetails.map((item, index) => { 
     if (item['id'] === arr['id']){
-          item = arr
+        item = arr;
     }
-      return item
+      return item;
     }) 
     setEmployees([...newArr]); 
     setEmployeesDetailsCopy([...newArr]); 
@@ -57,13 +50,16 @@ const Main = () => {
     })  
     setEmployees([...newArr]); 
     setEmployeesDetailsCopy([...newArr]); 
-    setIsDeleteConfirm(false);    
+    setIsDeleteConfirm(false);
+    setEmployeeCounter(employeesDetails.length);    
   }
 
   const refreshEmployeeList = (arr) => {
     setEmployees([...employeesDetails, arr]); 
     setEmployeesDetailsCopy([...employeesDetailsCopy, arr]); 
     setIsVisibleCapture(false);
+    setEmployeeCounter(employeesDetails.length);
+    console.log(employeeCounter)
   }
 
   const editEmployee = (action, index) => {
@@ -73,7 +69,7 @@ const Main = () => {
   }
 
   
-  const sortEmployees = (field) => { 
+  const sortEmployeesList = () => { 
     alert()     
     // employeesDetails.sort((a, b) => {     
     //   if(a[field].localeCompare(b[field])) { 
@@ -82,37 +78,31 @@ const Main = () => {
     //     }              
     // })
     // setEmployees([...employeesDetails]);     
-    console.log(employeesDetails)   
+    // console.log(employeesDetails)   
   }
 
-  const searchEmployees = (e) => {    
+  const updateEmployeeCounter = () => {
 
-    let newArrCopy = employeesDetailsCopy;
+   }
 
-    console.log(newArrCopy)
-
-    setEmployees([...newArrCopy]); 
-
-    console.log(employeesDetails)
-
-    let newArr = employeesDetails.filter(item => {      
-         return item.firstName.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1 
-         || item.lastName.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1
-         || item.contactNumber.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1
+  const searchEmployees = (e) => {  
+    let newArr = employeesDetailsCopy
+    let newArrCopy = newArr.filter(item => {      
+         return item.firstName?.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1 
+         || item.lastName?.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1
+         || item.email?.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) != -1
     
     })  
-
-
-    setEmployees([...newArr])   
-    
+    setEmployees([...newArrCopy])       
 }
 
 
 
   return <div>
       <Layout addEmployee={addEmployee}
-        searchEmployees={searchEmployees}>
-          {employeesDetails.length > 0 ? <MidSection sortEmployees={sortEmployees}>
+        searchEmployees={searchEmployees}
+        employeeCounter={employeeCounter}>
+          {employeesDetails.length > 0 ? <MidSection sortEmployeesList={sortEmployeesList}>
              {employeesDetails.map((employee, index) => <EmployeeListItem key={index} 
              index={index}
              deleteEmployeeConfirm={deleteEmployeeConfirm} 

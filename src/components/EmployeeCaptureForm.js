@@ -82,16 +82,21 @@ const EmployeeCaptureForm = (props) => {
             <input id='lastName' value={formInfo.lastName} name="lastName" onChange={handleChange}/>
         </div>
       </div>
-
+      <div className='form-group-group'>
       <div className='form-group'>
         <label for='contactNumber'>Contact Number</label>
         <input id='contactNumber' value={formInfo.contactNumber} name="contactNumber" onChange={handleChange}/>
+      </div>
+      <div className='form-group'>
+        <label for='email'>Email</label>
+        <input type='email' id='email' value={formInfo.email} name="email" onChange={handleChange}/>
+      </div>
       </div>
 
 
       <div className='form-group'>
         <label for='dob'>Date of Birth</label>
-        <input id='dob' value={formInfo.dob} name="dob" onChange={handleChange}/>
+        <input type='date' id='dob' value={formInfo.dob} name="dob" onChange={handleChange}/>
       </div>
 
       <h3>Address info</h3>
@@ -145,7 +150,7 @@ const EmployeeCaptureForm = (props) => {
 
 
     <div className='form-sumit'><button onClick={() => {props.closeWindow()}}>Close</button> 
-    {props.action != 'View' ? <button onClick={handleSubmit}>Submit</button>: ''}
+    {props.action != 'View' ? <input type='submit' value='Submit' />: ''}
     </div>
 </form>
   </div>;

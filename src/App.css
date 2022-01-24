@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-button {
+button, input[type='submit'] {
   background: #70309e;
   border-radius: 32px;
   padding: 8px 16px;
@@ -243,8 +243,8 @@ button .fa{
   display: flex;
 }
 
-.form-sumit button:last-of-type {
-  margin-left: 8px
+.form-sumit button:first-of-type {
+  margin-right: 8px
 }
 
 .filter {
