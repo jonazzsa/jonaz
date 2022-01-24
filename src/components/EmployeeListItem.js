@@ -8,7 +8,7 @@ const EmployeeListItem = (props) => {
       <div>{props.employeeDetails.contactNumber}</div>
       <div className='list-action' onClick={(e) => props.editEmployee(props.employeeDetails.id, 'View', props.index)}>View</div>
       <div className='list-action' onClick={(e) => props.editEmployee(props.employeeDetails.id, 'Edit', props.index)}>Edit</div>
-      <div className='list-action' onClick={(e) => props.deleteEmployee(props.employeeDetails.id)}>Delete</div>
+      <div className='list-action' onClick={(e) => props.deleteEmployeeConfirm(props.index)}>Delete</div>
   </div>;
 };
 

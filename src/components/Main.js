@@ -3,6 +3,7 @@ import BackDrop from './BackDrop';
 import DeleteConfirm from './DeleteConfirm';
 import EmployeeCaptureForm from './EmployeeCaptureForm';
 import EmployeeListItem from './EmployeeListItem';
+import EmptyState from './EmptyState';
 import Layout from './Layout';
 import MidSection from './MidSection';
 
@@ -169,43 +170,47 @@ const Main = (props) => {
     ]
   }]);
 
-  const [employeesDetailsCopy] = useState(employeesDetails)
+  const [employeesDetailsCopy] = useState(employeesDetails);
 
-  const [isVisibleCapture, setIsVisibleCapture] = useState(false)
+  const [isVisibleCapture, setIsVisibleCapture] = useState(false);
 
-  const [captureAction, setCaptureAction] = useState("")
+  const [captureAction, setCaptureAction] = useState("");
 
-  const [selectedUser, setSelectedUser] = useState([])
+  const [selectedUser, setSelectedUser] = useState([]);
 
-  const [isDeleteConfirm, setIsDeleteConfirm] = useState(false)
+  const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
 
-  const [deleteId, setDeleteId] = useState()
+  const [deleteId, setDeleteId] = useState();
 
  
 
   const addEmployee = () => {
-    setIsVisibleCapture(true)
-    setSelectedUser([])
+    setIsVisibleCapture(true);
+    setSelectedUser([]);
   }
 
   const closeWindow = () => {
-    setIsVisibleCapture(false)
-    setIsDeleteConfirm(false)
+    setIsVisibleCapture(false);
+    setIsDeleteConfirm(false);
   }
 
    const deleteEmployeeConfirm = (index) => {
-    setIsDeleteConfirm(true)
+    setIsDeleteConfirm(true);
+    setDeleteId(index);
   }
 
-  const deleteEmployee = (index) => {
-    setIsDeleteConfirm(false)
-    setDeleteId(index)
+  const deleteEmployee = () => {
+    const news = employeesDetails.filter((item, index) => {      
+         return index != deleteId;
+    })  
+    setEmployees([...news]); 
+    setIsDeleteConfirm(false);    
   }
 
   const editEmployee = (action, index) => {
-    setIsVisibleCapture(true)
-    setCaptureAction(action)
-    setSelectedUser(employeesDetails[index])
+    setIsVisibleCapture(true);
+    setCaptureAction(action);
+    setSelectedUser(employeesDetails[index]);
   }
 
   
@@ -216,12 +221,12 @@ const Main = (props) => {
           return 1; 
         }              
     })
-    setEmployees([...employeesDetails])        
+    setEmployees([...employeesDetails]);        
   }
 
   const searchEmployees = (e) => {    
 
-    setEmployees([...employeesDetailsCopy]) 
+    setEmployees([...employeesDetailsCopy]); 
 
     const news = employeesDetails.filter(item => {
       
@@ -240,16 +245,17 @@ const Main = (props) => {
   return <div>
       <Layout addEmployee={addEmployee}
         searchEmployees={searchEmployees}>
-          <MidSection sortEmployees={sortEmployees}>
+          {employeesDetails.length > 0 ? <MidSection sortEmployees={sortEmployees}>
              {employeesDetails.map((employee, index) => <EmployeeListItem key={index} 
              index={index}
-             deleteEmployee={deleteEmployeeConfirm} 
+             deleteEmployeeConfirm={deleteEmployeeConfirm} 
              editEmployee={editEmployee}
              employeeDetails={employee} />)}
-          </MidSection>
+          </MidSection>: ''}
+          {employeesDetails.length == 0 ? <EmptyState />: ''}
           {isVisibleCapture ? <EmployeeCaptureForm action={captureAction} employeesDetails={selectedUser} closeWindow={closeWindow}/>: ''}
           {isVisibleCapture || isDeleteConfirm ? <BackDrop />: ''}
-          {isDeleteConfirm ? <DeleteConfirm closeWindow={closeWindow} deleteEmployee={deleteEmployee} />: ''}
+          {isDeleteConfirm ? <DeleteConfirm employeeName={`${employeesDetails[deleteId]['firstName']} ${employeesDetails[deleteId]['lastName']}`} closeWindow={closeWindow} deleteEmployee={deleteEmployee} />: ''}
       </Layout>
   </div>;
 }
